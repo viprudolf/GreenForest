@@ -14,8 +14,6 @@ class AddToCartForm(forms.Form):
     quantity = forms.IntegerField(min_value=1, initial=1, widget=forms.TextInput(attrs={'class': 'quantity-input'}))
 
 
-
-
 # форма авторизации
 class LoginForm(forms.Form):
     username = forms.CharField(required=True, label='Username')
@@ -65,7 +63,8 @@ class RegisterForm(ModelForm):
 
         return cleaned_data
 
-#Svaz'
+
+# Svaz'
 class ContactForm(forms.Form):
     first_name = forms.CharField(max_length=50)
     last_name = forms.CharField(max_length=50)
@@ -75,6 +74,16 @@ class ContactForm(forms.Form):
 
 
 class ProductSearchForm(forms.Form):
-    query = forms.CharField(label='Поиск', max_length=100, required=False)
-    min_price = forms.DecimalField(label='Минимальная цена', required=False)
-    max_price = forms.DecimalField(label='Максимальная цена', required=False)
+    query = forms.CharField(label='Поиск', max_length=100, required=False,
+                            widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'id_query'}))
+    min_price = forms.DecimalField(label='Минимальная цена', required=False,
+                                   widget=forms.NumberInput(attrs={'class': 'form-control', 'id': 'id_min_price'}))
+    max_price = forms.DecimalField(label='Максимальная цена', required=False,
+                                   widget=forms.NumberInput(attrs={'class': 'form-control', 'id': 'id_max_price'}))
+
+
+class PriceFilterForm(forms.Form):
+    min_price = forms.DecimalField(label='Минимальная цена', required=False,
+                                   widget=forms.NumberInput(attrs={'class': 'form-control', 'id': 'id_min_price'}))
+    max_price = forms.DecimalField(label='Максимальная цена', required=False,
+                                   widget=forms.NumberInput(attrs={'class': 'form-control', 'id': 'id_max_price'}))

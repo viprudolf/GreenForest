@@ -1,27 +1,17 @@
 from django.contrib.auth import authenticate, login, logout
-
-from .forms import LoginForm, RegisterForm, ContactForm
-from .models import Product, CartItem
-from django.shortcuts import render, redirect
-from django.shortcuts import render, redirect
-from .forms import ContactForm
-from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse
-from django.core.mail import send_mail
-from .forms import ContactForm
 from django.shortcuts import render
 from .models import Product
-from .forms import ProductSearchForm
+from .forms import ProductSearchForm, PriceFilterForm
+from .forms import LoginForm, RegisterForm
+from .models import CartItem
+from django.shortcuts import redirect
 
-
-
+from django.core.mail import send_mail
+from .forms import ContactForm
 
 def view_cart(request):
     cart_items = CartItem.objects.filter(user=request.user)
     total_price = sum(item.product.price * item.quantity for item in cart_items)
-
-
-
 
     if request.method == 'POST':
         # Обработка формы
@@ -31,7 +21,7 @@ def view_cart(request):
 
             # Строка с информацией о товарах
             cart_info = '\n'.join(
-                [f'{item.product.name} - {item.quantity} шт. - {item.product.price * item.quantity} грн' for item in
+                [f'{item.product.name} - {item.quantity} шт. - {item.product.price * item.quantity} Рублей' for item in
                  cart_items])
 
             # Строка с информацией из формы
@@ -51,21 +41,17 @@ def view_cart(request):
 
     return render(request, 'blog/cart.html', {'cart_items': cart_items, 'total_price': total_price, 'form': form})
 
-# def view_cart(request):
-#     cart_items = CartItem.objects.filter(user=request.user)
-#     total_price = sum(item.product.price * item.quantity for item in cart_items)
-#     return render(request, 'blog/cart.html', {'cart_items': cart_items, 'total_price': total_price})
+
 
 
 def add_to_cart(request, product_id):
     product = Product.objects.get(id=product_id)
     cart_item, created = CartItem.objects.get_or_create(product=product,
 
-                                                         user=request.user)
+                                                        user=request.user)
     cart_item.quantity += 1
     cart_item.save()
     return redirect('view_cart')
-
 
 
 def remove_from_cart(request, item_id):
@@ -74,24 +60,7 @@ def remove_from_cart(request, item_id):
     return redirect('view_cart')
 
 
-# def contact(request):
-#     if request.method == 'POST':
-#         form = ContactForm(request.POST)
-#         if form.is_valid():
-#             # Обработка данных формы (например, отправка электронного письма)
-#             # Здесь вы можете добавить свой код обработки формы
-#             # ...
-#
-#             # После успешной обработки формы, вы можете добавить редирект или другую логику
-#             return render(request, 'success.html')  # Создайте шаблон success.html
-#
-#     else:
-#         form = ContactForm()
-#
-#     return render(request, 'contact.html', {'form': form})
 
-
-# Create your views here.
 def layout(request):
     products = Product.objects.all()
 
@@ -166,35 +135,34 @@ def registerPage(request):
     return render(request, 'blog/registration.html', {'form': form})
 
 
-#фильтр
+# фильтр
+
 
 
 def product_search(request):
+    form = ProductSearchForm(request.GET)
+    products = Product.objects.all()
 
+    if form.is_valid():
+        query = form.cleaned_data.get('query')
+        if query:
+            products = products.filter(name__icontains=query)
 
-    query = request.GET.get('query')
-    min_price = request.GET.get('min_price')
-    max_price = request.GET.get('max_price')
+    context = {'products': products, 'form': form}
+    return render(request, 'product_search.html', context)
 
-    results = Product.objects.all()
+def filter_by_price(request):
+    form = PriceFilterForm(request.GET)
+    products = Product.objects.all()
 
-    if query:
-        results = results.filter(name__icontains=query)
+    if form.is_valid():
+        min_price = form.cleaned_data.get('min_price')
+        max_price = form.cleaned_data.get('max_price')
 
-    if min_price:
-        try:
-            min_price = float(min_price)
-            results = results.filter(price__gte=min_price)
-        except ValueError:
-            pass
+        if min_price:
+            products = products.filter(price__gte=min_price)
+        if max_price:
+            products = products.filter(price__lte=max_price)
 
-    if max_price:
-        try:
-            max_price = float(max_price)
-            results = results.filter(price__lte=max_price)
-        except ValueError:
-            pass
-
-    form = ProductSearchForm()
-
-    return render(request, 'blog/layout.html', {'form': form, 'results': results})
+    context = {'products': products, 'form': form}
+    return render(request, 'filter_by_price.html', context)

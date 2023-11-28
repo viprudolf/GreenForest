@@ -17,7 +17,7 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #fff;
         }
 
         header {
@@ -28,6 +28,7 @@
         }
 
         main {
+        border: 2px solid #284530;
             max-width: 800px;
             margin: 20px auto;
             padding: 20px;
@@ -91,15 +92,14 @@
 <main>
     <form action="#" method="post">
 <div style="margin:80px">
-    <h1>Контакты</h1>
-    <h4>Напишите нам, если у вас есть вопросы</h4>
+    <h2>Контакты</h2>
     <p>
         Пожалуйста, напишите свое имя, адрес электронной почты и сообщение.
     </p>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <h1>Общая сумма: Рублей{{ total_price }}</h1>
+        <h1>Общая сумма: {{ total_price }} Рублей</h1>
 
         <button type="submit">Отправить</button>
     </form>
@@ -111,7 +111,8 @@
 
 
     {% for item in cart_items %}
-    <div class="service">
+    <div class="cart_service">
+
         <h3>{{ item.product.name }} ({{ item.quantity }})</h3>
         <h3>Цена: Рублей{{ item.product.price }}</h3>
         <a class="button-buy" href="{% url 'remove_from_cart' item.id %}">Убрать</a>

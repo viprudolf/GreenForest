@@ -11,6 +11,15 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
+    @classmethod
+    def search(cls, query, min_price=None, max_price=None):
+        products = cls.objects.filter(name__icontains=query.lower())
+        if min_price is not None:
+            products = products.filter(price__gte=min_price)
+        if max_price is not None:
+            products = products.filter(price__lte=max_price)
+        return products
+
 
 class CartItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
@@ -20,3 +29,4 @@ class CartItem(models.Model):
 
     def __str__(self):
         return f'{self.quantity} x {self.product.name}'
+

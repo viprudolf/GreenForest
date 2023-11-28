@@ -36,22 +36,6 @@
 
 </header>
 
-<h2>Результаты поиска</h2>
-
-<form method="get" action="{% url 'home' %}">
-    {{ form.as_p }}
-    <button type="submit">Искать</button>
-</form>
-
-{% if results %}
-    <ul>
-        {% for product in results %}
-            <li>{{ product.name }} - {{ product.price }} грн</li>
-        {% endfor %}
-    </ul>
-{% else %}
-    <p>Ничего не найдено.</p>
-{% endif %}
 <h2>Каталог</h2>
 
 <ul class="services">
@@ -60,27 +44,27 @@
         <img class="img-mebel" src="{{ product.image.url }}" alt="{{ product.name }}" width="200" height="150">
         <h1>{{ product.name }}</h1>
         <p>{{ product.description }}</p>
-        <p>Price: ${{ product.price }}</p>
-        <!--        <a href="cart.html" class="button-buy">Buy Now</a>-->
+        <p> {{ product.price }} Рублей</p>
         <a class="button-buy" href="{% url 'add_to_cart' product.id %}">Добавить в корзину</a>
     </li>
     {% endfor %}
+
+
 </ul>
-</ul>
 
 
-<suction>
-    <div>
+    <suction>
+        <div>
 
-        <div class="pol">
-            <h3 class="viprudolf">mebel@gmail.com</h3>
-            <h3 class="viprudolf"> +7 (987) 575 74 70</h3>
-            <h4 class="viprudolf">@viprudolf
-            </h4>
+            <div class="pol">
+                <h3 class="viprudolf">mebel@gmail.com</h3>
+                <h3 class="viprudolf"> +7 (987) 575 74 70</h3>
+                <h4 class="viprudolf">@viprudolf
+                </h4>
 
-        </div>
+            </div>
 
-</suction>
+    </suction>
 
 </body>
 </html>
