@@ -1,0 +1,39 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyPep8NamingInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredErrors">
+        <list>
+          <option value="N806" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyShadowingBuiltinsInspection" enabled="true" level="WEAK WARNING" enabled_by_default="true">
+      <option name="ignoredNames">
+        <list>
+          <option value="input" />
+        </list>
+      </option>
+    </inspection_tool>
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="tuple.append" />
+          <option value="int.append" />
+          <option value="startWebsite.startWebsite.urls.views" />
+          <option value="django.views.*" />
+          <option value="blog.models" />
+          <option value="django.conf.urls.path" />
+          <option value="MyFirstProject.blog.urls.include" />
+          <option value="blog.views" />
+          <option value="django.conf.urls.url" />
+          <option value="MyFirstProject.blog.views.Article" />
+          <option value="Articles" />
+          <option value="Task_3.list_of_numbers" />
+          <option value="int.rfind" />
+          <option value="MyFirstProject.blog.models.*" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
