@@ -164,7 +164,7 @@ display: flex;
 
 }
 .cart_service{float: left;
-    width: 15%;
+width: 15%;
     border-radius: 30px;
     border: 2px solid #284530;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
@@ -284,4 +284,19 @@ color: #000;
     margin-bottom: 10px;
     width: 100%;
     box-sizing: border-box;
+}
+Copy code
+/* Стили для мобильных устройств */
+@media (max-width: 767px) {
+    /* Ваши стили для мобильных устройств здесь */
+}
+
+/* Стили для планшетов и маленьких экранов */
+@media (min-width: 768px) and (max-width: 991px) {
+    /* Ваши стили для планшетов здесь */
+}
+
+/* Стили для широких экранов (например, десктопов) */
+@media (min-width: 992px) {
+    /* Ваши стили для широких экранов здесь */
 }
