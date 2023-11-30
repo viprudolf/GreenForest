@@ -1,11 +1,12 @@
 from django.contrib.auth import authenticate, login, logout
-from django.shortcuts import render
-from .models import Product
-from .forms import ProductSearchForm, PriceFilterForm
+
+from .forms import PriceFilterForm
 from .forms import LoginForm, RegisterForm
 from .models import CartItem
 from django.shortcuts import redirect
 
+from django.shortcuts import render
+from .models import Product
 from django.core.mail import send_mail
 from .forms import ContactForm
 
@@ -24,11 +25,18 @@ def view_cart(request):
                 [f'{item.product.name} - {item.quantity} шт. - {item.product.price * item.quantity} Рублей' for item in
                  cart_items])
 
-            # Строка с информацией из формы
-            message = f'Имя: {form.cleaned_data["first_name"]} {form.cleaned_data["last_name"]}\nEmail: {form.cleaned_data["email_address"]}\nСообщение: {form.cleaned_data["message"]}\n\nТовары в корзине:\n{cart_info}'
+            # Создание сообщения
+            message = f'Имя: {form.cleaned_data["first_name"]} {form.cleaned_data["last_name"]}\n'
+            message += f'Email: {form.cleaned_data["email_address"]}\n'
+            message += f'Номер телефона: {form.cleaned_data["number_telefon"]}\n'
+            message += f'Город: {form.cleaned_data["city"]}\n'
+            message += f'Улица: {form.cleaned_data["address"]}\n'
+            message += f'Сообщение: {form.cleaned_data["message"]}\n\n'
+            message += f'Общая сумма товара: {total_price} Рублей\n\n'
+            message += f'Товары в корзине:\n{cart_info}'
 
             from_email = 'rudchenko.rudchenko27@gmail.com'
-            recipient_list = ['admin@example.com']
+            recipient_list = ['vip.rudolf_n@mail.ru']
 
             send_mail(subject, message, from_email, recipient_list)
 
@@ -40,6 +48,7 @@ def view_cart(request):
         form = ContactForm()
 
     return render(request, 'blog/cart.html', {'cart_items': cart_items, 'total_price': total_price, 'form': form})
+
 
 
 
@@ -138,31 +147,32 @@ def registerPage(request):
 # фильтр
 
 
+from django.db.models import Q
 
-def product_search(request):
-    form = ProductSearchForm(request.GET)
+def product_list(request):
     products = Product.objects.all()
 
-    if form.is_valid():
-        query = form.cleaned_data.get('query')
-        if query:
-            products = products.filter(name__icontains=query)
+    # Обработка поиска по имени
+    search_query = request.GET.get('search_query')
+    if search_query:
+        products = products.filter(name__icontains=search_query)
 
-    context = {'products': products, 'form': form}
-    return render(request, 'product_search.html', context)
+    # Обработка поиска по цене
+    min_price = request.GET.get('min_price')
+    max_price = request.GET.get('max_price')
 
-def filter_by_price(request):
-    form = PriceFilterForm(request.GET)
-    products = Product.objects.all()
+    if min_price and max_price:
+        # Если указаны и минимальная, и максимальная цена
+        products = products.filter(price__range=(min_price, max_price))
+    elif min_price:
+        # Если указана только минимальная цена
+        products = products.filter(price__gte=min_price)
+    elif max_price:
+        # Если указана только максимальная цена
+        products = products.filter(price__lte=max_price)
 
-    if form.is_valid():
-        min_price = form.cleaned_data.get('min_price')
-        max_price = form.cleaned_data.get('max_price')
+    context = {
+        'products': products,
+    }
 
-        if min_price:
-            products = products.filter(price__gte=min_price)
-        if max_price:
-            products = products.filter(price__lte=max_price)
-
-    context = {'products': products, 'form': form}
-    return render(request, 'filter_by_price.html', context)
+    return render(request, 'blog/product_search.html', context)

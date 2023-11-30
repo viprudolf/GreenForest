@@ -118,7 +118,7 @@ margin: 3%;
 }
 h2{
 
-     margin: 2em 0 2em 0;
+     margin: 2em 0 1em 0;
     font-weight: 100;
         text-align-last: center;
 
@@ -149,8 +149,22 @@ color: #676767;
     margin-bottom: 1rem;
 
 }
+.cart_services{   color: #000;
+display: flex;
+    text-align: center;
+    margin:auto;
+    margin-top: 10px
+    list-style: none; /* Убираем стандартные маркеры списка */
+  padding: 0;
+  margin: 0;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+
+
+}
 .cart_service{float: left;
-    width: 27%;
+    width: 15%;
     border-radius: 30px;
     border: 2px solid #284530;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
@@ -253,4 +267,21 @@ color: #000;
   font-weight:200;   
 }
 
-/*CARD*/
+/*POISK*/
+/* Стили для основного контейнера формы */
+.product {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #000;
+    border-radius: 3px;
+}
+
+/* Стили для полей ввода и кнопки */
+.product input[type="text"],
+.product button {
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}

@@ -65,25 +65,38 @@ class RegisterForm(ModelForm):
 
 
 # Svaz'
+
 class ContactForm(forms.Form):
-    first_name = forms.CharField(max_length=50)
-    last_name = forms.CharField(max_length=50)
-    email_address = forms.EmailField(max_length=150)
-    message = forms.CharField(widget=forms.Textarea,
-                              max_length=2000)
+    first_name = forms.CharField(max_length=50, label='Имя')
+    last_name = forms.CharField(max_length=50, label='Фамилия')
+    email_address = forms.EmailField(max_length=150, label='Почта')
+    number_telefon = forms.CharField(max_length=20, label='Номер телефона')
+    city = forms.CharField(max_length=150, label='Город')
+    address = forms.CharField(max_length=150, label='Улица')
+    message = forms.CharField(widget=forms.Textarea, max_length=2000, label='Ваш комментарий')
 
-
-class ProductSearchForm(forms.Form):
-    query = forms.CharField(label='Поиск', max_length=100, required=False,
-                            widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'id_query'}))
-    min_price = forms.DecimalField(label='Минимальная цена', required=False,
-                                   widget=forms.NumberInput(attrs={'class': 'form-control', 'id': 'id_min_price'}))
-    max_price = forms.DecimalField(label='Максимальная цена', required=False,
-                                   widget=forms.NumberInput(attrs={'class': 'form-control', 'id': 'id_max_price'}))
 
 
 class PriceFilterForm(forms.Form):
+    query = forms.CharField(
+        label='Поиск',
+        max_length=100,
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control', 'id': 'id_query'}),
+        validators=[
+            RegexValidator(
+                regex='^[a-zA-Zа-яА-Я0-9]*$',
+                message='Может содержать только латинские и кириллические буквы, а также цифры',
+                code='invalid_query'
+            ),
+        ]
+    )
+
     min_price = forms.DecimalField(label='Минимальная цена', required=False,
                                    widget=forms.NumberInput(attrs={'class': 'form-control', 'id': 'id_min_price'}))
     max_price = forms.DecimalField(label='Максимальная цена', required=False,
+
                                    widget=forms.NumberInput(attrs={'class': 'form-control', 'id': 'id_max_price'}))
+
+
+

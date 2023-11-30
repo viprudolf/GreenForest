@@ -10,12 +10,7 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
 
-
-</head>
-
-<body>
-<header>
-    <nav style=" height: 900px;text-align: center;background-si ze: cover; background-image: url({% static 'blog/img/background.jpg' %});"
+<nav style=" height: 900px;text-align: center;background-si ze: cover; background-image: url({% static 'blog/img/background.jpg' %});"
          id="main-nav">
         <div class="logo-holder">
             <img src="{% static 'blog/img/logo.jpg' %}" alt="GREENFOREST"
@@ -24,6 +19,7 @@
         <div class="GREENFOREST">
             <p1>GREEN FOREST</p1>
         </div>
+
         <ul id="main-manu">
             <li class="main-manu-item"><a href="{% url 'home' %}">Главная</a></li>
             <li class="main-manu-item"><a href="{% url 'about' %}">О нас</a></li>
@@ -34,23 +30,41 @@
         </ul>
     </nav>
 
-</header>
+
+</head>
+
+<body>
+
 
 <h2>Каталог</h2>
+ <form class="product" method="get" action="{% url 'product_search' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="text" name="search_query" placeholder="Введите название продукта">
+        {% csrf_token %}
+    <!-- Другие поля формы (если есть) -->
+
+    <label for="id_min_price">Минимальная цена:</label>
+    <input type="number" name="min_price" class="form-control" id="id_min_price" value="{{ request.GET.min_price }}">
+
+    <label for="id_max_price">Максимальная цена:</label>
+    <input type="number" name="max_price" class="form-control" id="id_max_price" value="{{ request.GET.max_price }}">
+    <button class="button-buy" type="submit">Искать</button>
+</form>
 
 <ul class="services">
     {% for product in products %}
-    <li class="service">
-        <img class="img-mebel" src="{{ product.image.url }}" alt="{{ product.name }}" width="200" height="150">
-        <h1>{{ product.name }}</h1>
-        <p>{{ product.description }}</p>
-        <p> {{ product.price }} Рублей</p>
-        <a class="button-buy" href="{% url 'add_to_cart' product.id %}">Добавить в корзину</a>
-    </li>
+        <li class="service">
+            <img class="img-mebel" src="{{ product.image.url }}" alt="{{ product.name }}" width="200" height="150">
+            <h1>{{ product.name }}</h1>
+            <p>{{ product.description }}</p>
+            <p> {{ product.price }} Рублей</p>
+            <a class="button-buy" href="{% url 'add_to_cart' product.id %}">Добавить в корзину</a>
+        </li>
     {% endfor %}
-
-
 </ul>
+
+
 
 
     <suction>
