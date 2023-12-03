@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 
 from .forms import PriceFilterForm
 from .forms import LoginForm, RegisterForm
@@ -9,7 +10,7 @@ from django.shortcuts import render
 from .models import Product
 from django.core.mail import send_mail
 from .forms import ContactForm
-
+@login_required(login_url='login')
 def view_cart(request):
     cart_items = CartItem.objects.filter(user=request.user)
     total_price = sum(item.product.price * item.quantity for item in cart_items)
