@@ -98,5 +98,3 @@ class PriceFilterForm(forms.Form):
 
                                    widget=forms.NumberInput(attrs={'class': 'form-control', 'id': 'id_max_price'}))
 
-
-

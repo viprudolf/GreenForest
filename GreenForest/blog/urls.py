@@ -17,13 +17,14 @@ Including another URLconf
 from django.urls import path
 from . import views
 
-
 urlpatterns = [
+
     path('', views.layout, name='home'),
     path('about/', views.about, name="about"),
     path('login/', views.loginPage, name='login'),
     path('register/', views.registerPage, name='register'),
     path('me/', views.me, name='me'),
+
     path('logout/', views.doLogout, name='logout'),
     path('cart/', views.view_cart, name='view_cart'),
     path('product_search/', views.product_list, name='product_search'),
@@ -31,4 +32,3 @@ urlpatterns = [
     path('remove/<int:item_id>/', views.remove_from_cart, name='remove_from_cart'),
 
 ]
-

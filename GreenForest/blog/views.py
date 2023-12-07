@@ -1,7 +1,6 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
-from .forms import PriceFilterForm
 from .forms import LoginForm, RegisterForm
 from .models import CartItem
 from django.shortcuts import redirect
@@ -177,3 +176,5 @@ def product_list(request):
     }
 
     return render(request, 'blog/product_search.html', context)
+
+
