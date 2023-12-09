@@ -98,3 +98,57 @@ class PriceFilterForm(forms.Form):
 
                                    widget=forms.NumberInput(attrs={'class': 'form-control', 'id': 'id_max_price'}))
 
+
+from django import forms
+from django.contrib.auth.models import User
+
+from .models import Profile
+
+
+class UserUpdateForm(forms.ModelForm):
+    """
+    Форма обновления данных пользователя
+    """
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'first_name', 'last_name')
+
+    def __init__(self, *args, **kwargs):
+        """
+        Обновление стилей формы под bootstrap
+        """
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({
+                'class': 'form-control',
+                'autocomplete': 'off'
+            })
+
+    def clean_email(self):
+        """
+        Проверка email на уникальность
+        """
+        email = self.cleaned_data.get('email')
+        username = self.cleaned_data.get('username')
+        if email and User.objects.filter(email=email).exclude(username=username).exists():
+            raise forms.ValidationError('Email адрес должен быть уникальным')
+        return email
+
+
+class ProfileUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('slug', 'birth_date', 'bio', 'avatar')
+
+        widgets = {
+            'birth_date': forms.DateInput(attrs={'type': 'date'}),
+        }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs.update({
+                'class': 'form-control',
+                'autocomplete': 'off'
+            })

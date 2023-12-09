@@ -5,4 +5,12 @@ from django.contrib import admin
 admin.site.register(Product)
 admin.site.register(CartItem)
 
+from .models import Profile
 
+@admin.register(Profile)
+class ProfileAdmin(admin.ModelAdmin):
+    """
+    Админ-панель модели профиля
+    """
+    list_display = ('user', 'birth_date', 'slug')
+    list_display_links = ('user', 'slug')

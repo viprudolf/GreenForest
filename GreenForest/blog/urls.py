@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.urls import path
 from . import views
+from .views import ProfileUpdateView, ProfileDetailView
 
 urlpatterns = [
 
@@ -24,7 +25,8 @@ urlpatterns = [
     path('login/', views.loginPage, name='login'),
     path('register/', views.registerPage, name='register'),
     path('me/', views.me, name='me'),
-
+    path('user/edit/', ProfileUpdateView.as_view(), name='profile_edit'),
+    path('user/<str:slug>/', ProfileDetailView.as_view(), name='profile_detail'),
     path('logout/', views.doLogout, name='logout'),
     path('cart/', views.view_cart, name='view_cart'),
     path('product_search/', views.product_list, name='product_search'),

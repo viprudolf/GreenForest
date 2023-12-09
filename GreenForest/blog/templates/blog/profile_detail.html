@@ -1,0 +1,44 @@
+{{ profile.slug }}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+<body>
+{% block content %}
+<div class="card border-0">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+                <figure>
+                    <img src="{{ profile.avatar.url }}" class="img-fluid rounded-0" alt="{{ profile }}">
+                </figure>
+            </div>
+            <div class="col-md-9">
+                <h5 class="card-title">
+                    {{ profile }}
+                </h5>
+                <div class="card-text">
+                    <ul>
+                        <li>Никнейм: {{ profile.user.username }}</li>
+                        {% if profile.user.get_full_name %} <li>Имя и фамилия: {{ profile.user.get_full_name }}</li> {% endif %}
+                        <li>Email: {{ profile.user.email }}</li>
+                        <li>Дата рождения: {{ profile.birth_date|date:"d-m-Y" }}</li>
+                        <li>О себе: {{ profile.bio }}</li>
+                        <li>Последний раз заходил: {{ profile.user.last_login|date:"d-m-Y H:i:s" }}</li>
+                    </ul>
+                 <a href="{% url 'profile_edit' %}" class="btn btn-sm btn-primary">Редактировать профиль</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+</body>
+</html>
