@@ -84,7 +84,16 @@
     <ul id="main-manu">
         <li class="main-manu-item"><a href="{% url 'home' %}">Главная</a></li>
         <li class="main-manu-item"><a href="{% url 'about' %}">О нас</a></li>
-        <li class="main-manu-item"><a href="{% url 'me' %}">Профиль</a></li>
+         {% if user.is_authenticated and user.profile and user.profile.slug %}
+            <li class="main-manu-item"><a href="{% url 'profile_detail' slug=user.profile.slug %}">Профиль</a></li>
+            <li class="main-manu-item"><a href="{% url 'me' %}">Выйти</a></li>
+        {% elif user.is_authenticated %}
+            <!-- Обработка случая, когда у пользователя есть профиль, но у профиля нет slug -->
+            <li>Профиль (без slug)</li>
+        {% else %}
+            <!-- Обработка случая, когда пользователь не аутентифицирован -->
+                    <li class="main-manu-item"><a href="{% url 'login' %}">Войти</a></li>
+        {% endif %}
     </ul>
 </head>
 

@@ -8,13 +8,61 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
         <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
+<style>/* Style for the card */
+.card {
+    background-color: #fff; /* Set your desired background color */
+    border-radius: 10px; /* Set your desired border radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+}
 
+.card-body {
+    padding: 20px;
+}
+
+.card-title {
+    background-color: #007bff; /* Set your desired title background color */
+    color: #fff; /* Set your desired title text color */
+    padding: 10px;
+    border-radius: 5px 5px 0 0; /* Adjust border radius as needed */
+}
+
+.card-title h4 {
+    margin: 0;
+}
+
+/* Style for the form */
+form {
+    margin-top: 20px; /* Adjust the top margin based on your design preferences */
+}
+
+/* Style for form inputs */
+input[type="text"],
+input[type="email"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+.button-buy {
+      padding: 8px 16px;
+    background: #fff;
+    padding-top: 8px;
+    font-family: 'Ultra', sans-serif;
+    color: #000;
+}
+
+.button-buy:hover {
+    background-color: #fff;
+}
+
+/* Optional: Add some
+</style>
 </head>
 <body>
 {% block content %}
 <div class="card mb-3 border-0 nth-shadow">
    <div class="card-body">
-      <div class="card-title nth-card-title">
+      <div>
          <h4>Изменение профиля</h4>
       </div>
       <form method="post" enctype="multipart/form-data">
@@ -22,7 +70,7 @@
          {{ user_form.as_p }}
          {{ form.as_p }}
          <div class="d-grid gap-2 d-md-block mt-2">
-            <button type="submit" class="btn btn-dark">Подтвердить изменение профиля</button>
+            <button type="submit" class="button-buy">Сохранить</button>
          </div>
       </form>
    </div>

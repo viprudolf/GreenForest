@@ -1,4 +1,5 @@
-{{ profile.slug }}
+{% load static %}
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -7,11 +8,99 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+        <link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
 
+<style>
+/* Style for the main navigation menu */
+#main-menu {
+    background-color: #007bff; /* Set your desired background color */
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.main-menu-item {
+    float: left;
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+.main-menu-item:hover {
+    background-color: #0056b3; /* Set your desired hover background color */
+}
+
+/* Style for the services section */
+.services {
+    margin-top: 80px; /* Adjust the top margin based on your design preferences */
+}
+
+/* Style for the profile card */
+.card-body {
+    background-color: #fff; /* Set your desired background color */
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 1.5rem;
+    color: #676767;
+    margin-bottom: 10px;
+    font-weight: 100;
+    text-transform: uppercase;
+
+    font-style: inherit;
+    font-family: 'Ultra', sans-serif;
+    font-size: 75px;
+    text-shadow: 2px 5px 0 rgba(0,0,0,0.2);
+}
+
+.services ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.services li {
+    margin-bottom: 30px;
+}
+
+.button-buy {
+    background-color: #3f9152;
+    padding: 8px 16px;
+    background: #fff;
+    width: 225px;
+
+    padding-top: 8px;
+
+    font-family: 'Ultra', sans-serif;
+
+    color: #000;
+
+
+}
+
+.button-buy:hover {
+    background-color: #fff;
+}
+
+
+
+
+/* Уменьшаем максимальные размеры до 900 x 900 пикселей */
+.img-fluid {
+    max-width: 200px;
+    max-height: 200px;
+}
+
+
+
+
+</style>
 </head>
 <body>
 {% block content %}
-<div class="card border-0">
+<div class="services">
     <div class="card-body">
         <div class="row">
             <div class="col-md-3">
@@ -23,7 +112,7 @@
                 <h5 class="card-title">
                     {{ profile }}
                 </h5>
-                <div class="card-text">
+                <div class="services">
                     <ul>
                         <li>Никнейм: {{ profile.user.username }}</li>
                         {% if profile.user.get_full_name %} <li>Имя и фамилия: {{ profile.user.get_full_name }}</li> {% endif %}
@@ -32,7 +121,9 @@
                         <li>О себе: {{ profile.bio }}</li>
                         <li>Последний раз заходил: {{ profile.user.last_login|date:"d-m-Y H:i:s" }}</li>
                     </ul>
-                 <a href="{% url 'profile_edit' %}" class="btn btn-sm btn-primary">Редактировать профиль</a>
+                 <a class="button-buy" href="{% url 'profile_edit' %}">Редактировать профиль</a>
+                 <a class="button-buy" href="{% url 'home' %}">Главная страница</a>
+<!--                    class="btn btn-sm btn-primary"-->
                 </div>
             </div>
         </div>

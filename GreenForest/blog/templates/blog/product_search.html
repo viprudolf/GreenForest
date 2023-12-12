@@ -31,9 +31,10 @@
         </ul>
     </nav>
 
-
 </head>
 <body>
+ <script src="{% static 'blog/js/img.js' %}"></script>
+
 <h2>Список продуктов</h2>
 
    <form class="product" method="get" action="{% url 'product_search' %}">
@@ -51,21 +52,31 @@
     <button class="button-buy" type="submit">Искать</button>
 </form>
 
-    {% if products %}
-        <ul class="cart_services">
-            {% for product in products %}
-                <li class="service">
-                    <img class="img-mebel" src="{{ product.image.url }}" alt="{{ product.name }}" width="200" height="150">
-                    <h1>{{ product.name }}</h1>
-                    <p>{{ product.description }}</p>
-                    <p> {{ product.price }} Рублей</p>
-                    <a class="button-buy" href="{% url 'add_to_cart' product.id %}">Добавить в корзину</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <h4>Такого продукта нет.</h4>
-    {% endif %}
+{% if products %}
+    <ul class="services">
+        {% for product in products %}
+            <li class="service">
+                <img class="img-mebel" src="{{ product.image.url }}" alt="{{ product.name }}" width="200" height="150" onclick="openProductInfoModal('{{ product.name }}', '{{ product.description }}')">
+                <h1>{{ product.name }}</h1>
+                <input type="checkbox" id="toggle{{ forloop.counter }}" class="toggle-checkbox">
+                <label for="toggle{{ forloop.counter }}" class="button-buy"><p>Полная информация</p></label>
+                <div class="description-container" id="description{{ forloop.counter }}">
+                    <p class="description">{{ product.description }}</p>
+                </div>
+                <p> {{ product.price }} Рублей</p>
+                <a class="button-buy" href="{% url 'add_to_cart' product.id %}">Добавить в корзину</a>
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <h4>Такого продукта нет.</h4>
+{% endif %}
 
+
+<div class="modal" id="imageModal">
+    <img id="modalImage" alt="Увеличенное изображение">
+    <p id="modalCaption"></p>
+    <span class="close-modal" onclick="closeImageModal()">&times;</span>
+</div>
 </body>
 </html>

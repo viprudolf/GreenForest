@@ -1,59 +1,58 @@
-/*GLOBAL nastroiky*/
-*{margin: 0; padding: 0;}
-body{font-family: :roboto, sans-serif}
+/* GLOBAL SETTINGS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
 
 p {
-margin: 3%;
+    margin: 3%;
     font-size: medium;
     margin-top: 0;
     margin-bottom: 3rem;
 }
 
-
-.logo-holder{
-    float:none;
-    
+.logo-holder {
+    float: none;
 }
-.logo-img{
-margin-top: 300px;
+
+.logo-img {
+    margin-top: 300px;
     height: 150px;
-    float: none
+    float: none;
 }
 
-#main-manu{
+#main-manu {
     list-style: none;
     text-align-last: center;
 }
 
-
-
 .main-manu-item {
     display: inline-block;
-
-    
 }
 
-.main-manu-item a{
-  background:#fff;
-  width:225px;
-  display:block;
-  height:40px;
-  padding-top:8px;
-   margin: 20px auto;
+.main-manu-item a {
+    background: #fff;
+    width: 225px;
+    display: block;
+    padding-top: 8px;
+    margin: 20px auto;
     font-style: inherit;
-    font-family: 'Ultra', sans-serif; 
-    font-size: 18px;
-  font-weight:200;
-  color:#000;
-  text-transform:uppercase;
-  text-decoration:none;
-  text-align:center;
-  opacity:.8;
-
+    font-family: 'Ultra', sans-serif;
+    font-size: 30px;
+    font-weight: 200;
+    color: #000;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    opacity: 0.8;
 }
 
-
-.GREENFOREST{
+.GREENFOREST {
     margin: 1em 0 0.5em 0;
     font-weight: 100;
     text-transform: uppercase;
@@ -62,170 +61,186 @@ margin-top: 300px;
     font-family: 'Ultra', sans-serif;
     font-size: 75px;
     line-height: 54px;
-    text-shadow: 2px 5px 0 rgba(0,0,0,0.2);
+    text-shadow: 2px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
-/*BUTTON_BUY*/
-.button-buy{
-  background:#fff;
-
-  display:block;
-  height:40px;
-  padding-top:8px;
-  border:1px solid #000;
-   margin: 20px auto;
+.button-buy {
+    background: #fff;
+    display: block;
+    padding-top: 8px;
+    margin: 20px auto;
     font-style: inherit;
     font-family: 'Ultra', sans-serif;
     font-size: 18px;
-
-  font-weight:200;
-  color:#000;
-  text-transform:uppercase;
-  text-decoration:none;
-  text-align:center;
-  opacity:.8;
-  height auto;
-
+    font-weight: 200;
+    color: #000;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    opacity: 0.8;
+    height: auto;
 }
 
-    
-
-/*services_BUY*/
-.services{
+.button-buy:hover {
     color: #000;
-    margin:auto;
-    margin-top: 10px
-    list-style: none; /* Убираем стандартные маркеры списка */
-  padding: 0;
-  margin: 0;
-  flex-wrap: wrap;
-  justify-content: space-between;
-        list-style: none;
-        display: flex;
+    color: inherit;
+    text-decoration: none;
+}
+
+.services,
+.cart_services {
+    color: #000;
+    margin: auto;
+    margin-top: 10px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    list-style: none;
+    display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items: baseline;
-        
-        
 }
-h4{
-margin: 3%;
 
-     font-weight: 100;
+h4,
+h2,
+h3 {
+    margin: 3%;
+}
+
+h4 {
+    font-weight: 100;
     text-align-last: center;
     text-transform: uppercase;
     color: #676767;
-    font-style: inherit;
-    font-family: 'Ultra', sans-serif;
 }
-h2{
 
-     margin: 2em 0 1em 0;
+h2 {
     font-weight: 100;
-        text-align-last: center;
-
+    text-align-last: center;
     text-transform: uppercase;
     color: #676767;
-    font-style: inherit;
-    font-family: 'Ultra', sans-serif;
     font-size: 75px;
     line-height: 54px;
-    text-shadow: 2px 5px 0 rgba(0,0,0,0.2);
+    text-shadow: 2px 5px 0 rgba(0, 0, 0, 0.2);
 }
 
-.subheader{
-    
-padding-bottom: 3rem;
-    
-    
-}
-
-
-
-
-h3{
-margin: 3%;
+h3 {
     font-size: 1.7rem;
-        text-align-last: center;
-color: #676767;
-    margin-bottom: 1rem;
-
+    text-align-last: center;
+    color: #676767;
 }
-.cart_services{   color: #000;
-    margin-top: 10px
-    list-style: none; /* Убираем стандартные маркеры списка */
-  padding: 0;
-  margin: 0;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  list-style: none;
 
-
-
-}
-.cart_service{float: left;
-width: 15%;
-    border-radius: 30px;
-    border: 2px solid #284530;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
-    margin: 3%;
-    padding: 1%;
-    box-sizing: border-box; /* Включаем box-sizing, чтобы полностью учитывать padding и border при расчете размеров элемента */
-}
+.cart_service,
 .service {
     float: left;
-    width: 27%;
-    height: 100%; /* Устанавливаем высоту на 100%, чтобы формы были одинакового размера */
-    border-radius: 30px;
     border: 2px solid #284530;
+    padding: 10px;
+    margin-bottom: 20px;
+    float: left;
+    width: 27%;
+    border-radius: 30px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
     margin: 3%;
     padding: 1%;
-    box-sizing: border-box; /* Включаем box-sizing, чтобы полностью учитывать padding и border при расчете размеров элемента */
+    box-sizing: border-box;
+}
+
+.description-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.toggle-checkbox {
+    display: none;
+}
+
+.toggle-checkbox:checked~.description-container {
+    max-height: 100%;
+    overflow: visible;
+    transition: max-height 0.3s ease;
+}
+
+.toggle-description-label {
+    display: block;
+    margin-top: 10px;
+    cursor: pointer;
+    color: #000;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+#modalImage {
+    width: 80%;
+    margin: 20px auto;
+    display: block;
+}
+
+#modalCaption {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+.close-modal {
+    color: #fff;
+    font-size: 24px;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    cursor: pointer;
 }
 
 .img-mebel {
-    width: 100%; /* Фиксированная ширина изображения */
-    height: 100%; /* Фиксированная высота изображения */
-    object-fit: cover; /* Заполняем размерами область содержимого */
-    border-radius: 15px; /* Применяем скругление углов */
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 15px;
 }
 
-.serv-descr{
-    margin-top: .8rem 0;
-    text-align: left
+.serv-descr {
+    margin-top: 0.8rem;
+    text-align: left;
 }
 
-
-
-/*ABOUT*/
-
-}
-.about-info{
-    float:left;
+.about-info {
+    float: left;
     border-radius: 30px;
     border: 2px solid #284530;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.4);
     padding: 2%;
-
-
-    
 }
-.about-img-mebel{
+
+.about-img-mebel {
     width: 100%;
     height: 100%;
     display: block;
-    margin: 0 auto; /* Центрируем изображение по горизонтали внутри блока */
+    margin: 0 auto;
 }
+
 .about-info {
     margin-top: 120px;
     text-align-last: center;
     font-style: inherit;
     font-family: 'Ultra', sans-serif;
     font-size: 20px;
-    font-weight: 200;v
+    font-weight: 200;
 }
-.serv-descr{
+
+.serv-descr {
     text-align-last: center;
     font-style: inherit;
     font-family: 'Ultra', sans-serif;
@@ -233,10 +248,9 @@ width: 15%;
     font-weight: 200;
 }
 
-/*POL*/
- .contact{
-  margin-top: 170rem;
-    height: 150px;
+/* POL */
+.pol{
+height: 177px;
     text-align: end;
   background:#6d6a44;
   border:1px solid #000;
@@ -245,30 +259,18 @@ width: 15%;
     font-size: 20px;
   font-weight:200;
   }
-
-.pol{
-    height: 150px;
-    text-align: end;
-  background:#6d6a44;
-  border:1px solid #000;
-    font-style: inherit;
-    font-family: 'Ultra', sans-serif; 
-    font-size: 20px;
-  font-weight:200;    
-    
-}
-.viprudolf{
-color: #000;
-    margin-top: 20px;
+.viprudolf {
+   margin: 1%;
+    color: #000;
+    margin-top: 25px;
     text-align-last: center;
     font-style: inherit;
-    font-family: 'Ultra', sans-serif; 
+    font-family: 'Ultra', sans-serif;
     font-size: 20px;
-  font-weight:200;   
+    font-weight: 200;
 }
 
-/*POISK*/
-/* Стили для основного контейнера формы */
+/* POISK */
 .product {
     max-width: 400px;
     margin: 0 auto;
@@ -277,7 +279,6 @@ color: #000;
     border-radius: 3px;
 }
 
-/* Стили для полей ввода и кнопки */
 .product input[type="text"],
 .product button {
     padding: 10px;
@@ -285,18 +286,65 @@ color: #000;
     width: 100%;
     box-sizing: border-box;
 }
-Copy code
-/* Стили для мобильных устройств */
-@media (max-width: 767px) {
-    /* Ваши стили для мобильных устройств здесь */
+
+/* MEDIA QUERIES FOR RESPONSIVENESS */
+
+@media only screen and (max-width: 1200px) {
+    /* Add styles for screens up to 1200px */
+    .about-info {
+        margin-top: 80px;
+    }
 }
 
-/* Стили для планшетов и маленьких экранов */
-@media (min-width: 768px) and (max-width: 991px) {
-    /* Ваши стили для планшетов здесь */
+@media only screen and (max-width: 768px) {
+    /* Add styles for screens up to 768px */
+    .logo-img {
+        margin-top: 100px;
+        height: 100px;
+    }
+
+    .main-manu-item a {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .button-buy {
+        margin: 10px auto;
+    }
+
+    .services,
+    .cart_services {
+        justify-content: center;
+    }
+
+    .service,
+    .cart_service {
+        width: 100%;
+    }
+
+    .about-info {
+        margin-top: 50px;
+    }
+
+    .contact {
+        margin-top: 50px;
+    }
 }
 
-/* Стили для широких экранов (например, десктопов) */
-@media (min-width: 992px) {
-    /* Ваши стили для широких экранов здесь */
+/* Add more media queries as needed for specific screen sizes */
+/* Добавлен медиа-запрос для уменьшения ширины элементов на более широких экранах */
+@media only screen and (min-width: 768px) {
+    .cart_service,
+    .service {
+        width: 48%; /* Уменьшена ширина элементов на более широких экранах, чтобы поместить два элемента в ряд */
+        margin: 1%; /* Добавлено небольшое расстояние между элементами */
+    }
+}
+
+/* Добавлен медиа-запрос для уменьшения ширины элементов на более широких экранах */
+@media only screen and (min-width: 1200px) {
+    .cart_service,
+    .service {
+        width: 31%; /* Уменьшена ширина элементов на еще более широких экранах, чтобы поместить три элемента в ряд */
+    }
 }

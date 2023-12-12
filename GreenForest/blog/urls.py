@@ -17,6 +17,8 @@ Including another URLconf
 from django.urls import path
 from . import views
 from .views import ProfileUpdateView, ProfileDetailView
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
 
@@ -34,3 +36,5 @@ urlpatterns = [
     path('remove/<int:item_id>/', views.remove_from_cart, name='remove_from_cart'),
 
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

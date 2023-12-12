@@ -1,8 +1,16 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
+from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 
-
+from django.db import models
+from django.core.validators import FileExtensionValidator
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+from django.urls import reverse
+from .utils import unique_slugify
 class Product(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField(null=True)
@@ -33,8 +41,7 @@ class CartItem(models.Model):
 
 
 # models.py
-from django.db import models
-from django.contrib.auth.models import User
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -46,13 +53,9 @@ class UserProfile(models.Model):
         return self.user.username
 
 
-from django.db import models
-from django.contrib.auth.models import User
-from django.core.validators import FileExtensionValidator
-from django.db.models.signals import post_save
-from django.dispatch import receiver
-from django.urls import reverse
-from blog.utils import unique_slugify  # Assuming you have a unique_slugify utility function
+
+User = get_user_model()
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -60,11 +63,9 @@ class Profile(models.Model):
     avatar = models.ImageField(
         verbose_name='Аватар',
         upload_to='images/avatars/%Y/%m/%d/',
-        default=('images/avatars/2023/polz.png'),
+        default='media/images/avatars/pozol.jpeg',
         blank=True,
-        validators=[FileExtensionValidator(allowed_extensions=('png', 'jpg', 'jpeg'))]
-    )
-
+        validators=[FileExtensionValidator(allowed_extensions=('png', 'jpg', 'jpeg'))])
     bio = models.TextField(max_length=500, blank=True, verbose_name='Информация о себе')
     birth_date = models.DateField(null=True, blank=True, verbose_name='Дата рождения')
 
@@ -94,10 +95,12 @@ class Profile(models.Model):
         """
         return reverse('profile_detail', kwargs={'slug': self.slug})
 
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
-        Profile.objects.create(user=instance, avatar='/media/images/polz.png')
+        Profile.objects.create(user=instance)
+
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):

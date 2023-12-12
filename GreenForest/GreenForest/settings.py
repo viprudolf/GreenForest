@@ -116,18 +116,23 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+
 # Static files (CSS, JavaScript, images)
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+
+
+# Define the static root directory for deployment
+STATIC_ROOT = BASE_DIR / "static_root"
+
 # Media files (uploaded user files)
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / "media"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATICFILES_DIRS = [
-    BASE_DIR / "blog/static"
-
-]
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
